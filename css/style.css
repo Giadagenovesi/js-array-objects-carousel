@@ -26,10 +26,20 @@ img {
 .slider-items {
     width: 100%;
     height: 50vh;
+    position: relative;
 }
 .item {
     height: 100%;
     display: none;
+}
+.description {
+    text-align: right;
+    color: white;
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    display: none;
+
 }
 .item img {
     width: 100%;
@@ -57,6 +67,7 @@ img {
     bottom: 1%; 
 }
 /* utilitys */
-.item.active {
+.item.active,
+.description.active {
     display: block;
 }
