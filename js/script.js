@@ -24,45 +24,35 @@ const images = [
     }
 ];
 
-
-const imagesArray = images.map((curImg) => curImg.image);
-console.log(imagesArray);
-
-const descriptionTitle = images.map((curTitle) => curTitle.title)
-console.log(descriptionTitle);
-
-const text = images.map((curText) => curText.text)
-console.log(text);
-
-
-const sliderContainer = document.querySelector(".slider-items");
-// console.log(sliderContainer);
-
-for (let i = 0; i < imagesArray.length; i++) {
-    const currentImage = imagesArray[i];
-
-    const sliderItem = `
-        <div class="item">
-            <img src="${currentImage}" alt="">
-        </div>
-        <div class="description">
-            <h2> </h2>
-            <p></p> 
-        </div>`;
-
-    console.log(sliderItem);
-    sliderContainer.innerHTML += sliderItem;
-}
+let activeItemIndex = 0;
+const items = document.getElementsByClassName("item");
+const description = document.getElementsByClassName("description");
 
 // Tutte le immagini saranno nascoste, tranne la prima, che avrà una classe specifica che la renderà visibile.
 
+const sliderContainer = document.querySelector(".slider-items");
+let sliderItem="";
+for (let i = 0; i < images.length; i++) {
+    let currentImage = images[i];
+    console.log(currentImage.image, currentImage.title, currentImage.text)
 
-const items = document.getElementsByClassName("item");
-console.log(items);
+    sliderItem += `
+        <div class="item">
+            <img src="${currentImage.image}" alt="">
+        </div>
+        <div class="description">
+            <h2>${currentImage.title}</h2>
+            <p>${currentImage.text}</p> 
+        </div>`;
 
-
-let activeItemIndex = 0;
+    sliderContainer.innerHTML = sliderItem;
+}
 items[activeItemIndex].classList.add("active");
+description[activeItemIndex].classList.add("active");
+
+
+
+
 
 // Al click dell'utente sulle frecce, il programma cambierà l’immagine attiva, che quindi verrà visualizzata al posto della precedente.
 
@@ -75,11 +65,16 @@ const prevBtn = document.querySelector(".prev");
 prevBtn.addEventListener ("click", showPrev);
 
 
-
 ////////////////////////////////////////////////////////////////////////////
 // FUNCTION
+function createElement (images) {
+    let sliderItem = "";
+
+}
+
 function showNext() {
     items[activeItemIndex].classList.remove("active");
+    description[activeItemIndex].classList.remove("active");
     if (activeItemIndex < items.length - 1) {
         // incremeto active index
         activeItemIndex++;  
@@ -88,10 +83,15 @@ function showNext() {
     }
     //Aggiungo classe active all'elemento successivo
     items[activeItemIndex].classList.add("active");
+    description[activeItemIndex].classList.add("active"); 
+
 }
+
 function showPrev() {
     //rimuovo classe active dall'elemento precedente
     items[activeItemIndex].classList.remove("active");
+    description[activeItemIndex].classList.remove("active");
+
     if (activeItemIndex === 0 ) {
         activeItemIndex = items.length -1;       
     } else {
@@ -99,7 +99,11 @@ function showPrev() {
          activeItemIndex--;
     }
     //Aggiungo classe active all'elemento successivo
-    items[activeItemIndex].classList.add("active"); 
+    items[activeItemIndex].classList.add("active");
+    description[activeItemIndex].classList.add("active"); 
+
 }
+
+
 
 
