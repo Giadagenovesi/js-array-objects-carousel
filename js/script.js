@@ -31,28 +31,9 @@ const description = document.getElementsByClassName("description");
 // Tutte le immagini saranno nascoste, tranne la prima, che avrà una classe specifica che la renderà visibile.
 
 const sliderContainer = document.querySelector(".slider-items");
-let sliderItem="";
-for (let i = 0; i < images.length; i++) {
-    let currentImage = images[i];
-    console.log(currentImage.image, currentImage.title, currentImage.text)
-
-    sliderItem += `
-        <div class="item">
-            <img src="${currentImage.image}" alt="">
-        </div>
-        <div class="description">
-            <h2>${currentImage.title}</h2>
-            <p>${currentImage.text}</p> 
-        </div>`;
-
-    sliderContainer.innerHTML = sliderItem;
-}
+createElement(images);
 items[activeItemIndex].classList.add("active");
 description[activeItemIndex].classList.add("active");
-
-
-
-
 
 // Al click dell'utente sulle frecce, il programma cambierà l’immagine attiva, che quindi verrà visualizzata al posto della precedente.
 
@@ -64,12 +45,25 @@ nextBtn.addEventListener ("click", showNext);
 const prevBtn = document.querySelector(".prev");
 prevBtn.addEventListener ("click", showPrev);
 
+//Autoplay
+setInterval (showNext, 3000);
 
 ////////////////////////////////////////////////////////////////////////////
 // FUNCTION
-function createElement (images) {
-    let sliderItem = "";
-
+function createElement (imagesArrey) {
+    let sliderItem="";
+for (let i = 0; i < imagesArrey.length; i++) {
+    let currentImage = imagesArrey[i];
+    sliderItem += `
+        <div class="item">
+            <img src="${currentImage.image}" alt="">
+        </div>
+        <div class="description">
+            <h2>${currentImage.title}</h2>
+            <p>${currentImage.text}</p> 
+        </div>`;
+    sliderContainer.innerHTML = sliderItem;
+}
 }
 
 function showNext() {
